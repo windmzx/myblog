@@ -63,17 +63,17 @@ summaryLength = 140
   [[menu.main]]
     identifier = "categories"
     name = "分类"
-    url = "/categories/"
+    url = "/categories.html"
     weight = 2
 
   [[menu.main]]
     identifier = "archives"
     name = "归档"
-    url = "/archives/"
+    url = "/archives.html"
     weight = 3
 
   [[menu.main]]
     identifier = "about"
     name = "关于"
-    url = "/about/"
+    url = "/about.html"
     weight = 4
