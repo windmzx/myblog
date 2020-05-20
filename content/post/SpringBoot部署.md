@@ -77,3 +77,35 @@ spring.datasource.time-between-eviction-runs-millis=8000
 spring.datasource.min-evictable-idle-time-millis=1000
 ```
 我们可以考对连接池进行配置，进行检测。
+
+### 静态资源访问太慢
+我用的是白嫖的阿里云主机，只有1M的带宽。大的js和图片那叫一个慢啊。
+可以使用阿里云的oss来加速访问。
+首先我们在阿里云oss控制台新建一个bucket。
+然后将spring boot staic中的静态文件上传。
+然后在nginx里如下配置
+```
+server {
+        listen 80;
+        server_name  wenda.0xaa.top;
+
+        location / {
+        # pass to aproxy
+        proxy_pass http://127.0.0.1:8080;
+        }
+
+        location /styles {
+        expires 24h;
+        proxy_pass http://mzxwenda.oss-cn-beijing.aliyuncs.com;
+        }
+
+        location /images {
+        expires 24h;
+        proxy_pass http://mzxwenda.oss-cn-beijing.aliyuncs.com;
+        }
+        location /scripts {
+        expires 24h;
+        proxy_pass http://mzxwenda.oss-cn-beijing.aliyuncs.com;
+        }
+}
+```
