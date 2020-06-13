@@ -8,7 +8,7 @@ date: 2020-06-04T09:40:46+08:00
 
 # 表结构如下
 
-![表结构](https://img.0xaa.top//Diagram 1.png)
+![表结构](https://img.0xaa.top//Diagram1.png)
 
 - *查询每门课程被选修的学生数* 
 
