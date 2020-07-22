@@ -77,3 +77,28 @@ import org.slf4j.MarkerFactory;
 private static final Marker LOGIN_MARKER = MarkerFactory.getMarker("LOGIN");
 ```
 
+
+
+这样我们就对登陆日志做好了一个标记。
+
+```xml
+     <Kafka name="Kafka1" topic="req_log" syncSend="false">
+            <MarkerFilter marker="REQ" onMatch="ACCEPT" onMismatch="DENY"/>
+<!--            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="%d{UNIX_MILLIS},%message"/>
+            <Property name="bootstrap.servers">192.168.1.175:9092,192.168.1.175:9093</Property>
+        </Kafka>
+
+        <Kafka name="Kafka2" topic="login_log" syncSend="false">
+            <MarkerFilter marker="LOGIN" onMatch="ACCEPT" onMismatch="DENY"/>
+<!--            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="%d{UNIX_MILLIS},%message"/>
+            <Property name="bootstrap.servers">192.168.1.175:9092,192.168.1.175:9093</Property>
+        </Kafka>
+```
+
+回到log4j的配置文件中，我们定义好两个Appender，分别过滤自己想要的日志，并且指定发送到不同的topic中。最后在Loggers属性中引用就可以。
+
+我们开两个消费者，查看我们的日志是否成功写入。
+
+![结果](http://img.0xaa.top/20200722103400.png)
