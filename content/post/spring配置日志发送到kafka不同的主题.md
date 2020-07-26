@@ -39,7 +39,13 @@ date: 2020-07-22T10:09:57+08:00
 
 
 
-那么如何解决不同的日志写到不同的主题里呢。我们继续查阅官网，发现有一个叫`Filter`的可以对日志进行过滤，而[MarkerFilter](https://logging.apache.org/log4j/2.x/manual/filters.html#MarkerFilter)则可以对标记进行过滤。我们如果给出这个标记呢？
+那么如何解决不同的日志写到不同的主题里呢。我们继续查阅官网，发现有一个叫`Filter`的可以对日志进行过滤。     
+
+```
+<MarkerFilter marker="FLOW" onMatch="ACCEPT" onMismatch="DENY"/>
+```
+
+而[MarkerFilter](https://logging.apache.org/log4j/2.x/manual/filters.html#MarkerFilter)则可以对标记进行过滤。我们如果给出这个标记呢？
 
 在[Marker](https://logging.apache.org/log4j/2.x/manual/markers.html)这一章节中，我们看到给出的Demo。
 
